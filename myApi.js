@@ -6,16 +6,8 @@ module.exports = {
 		scaffold: {
 			"public-assets": {
 				static: true,
-				//assetPath: 'public-assets',
 				path:  /html\/?.*/
 			}
-			// static: [{
-			// 	pathOnDisk: '/html',
-			// 	uriPath: /html\/?.*/
-			// },{
-			// 	pathOnDisk: '/docs/pdf',
-			// 	uriPath: /pdf\/?.*/
-			// }]
 		},
         functions: {
 			hello:{
