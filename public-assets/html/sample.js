@@ -135,7 +135,7 @@ function getSocketTokenAndConnect(){
             $('#lastResponse').text(JSON.stringify(err.responseJSON));
         }
     });
-
+    
 }
 
 /**

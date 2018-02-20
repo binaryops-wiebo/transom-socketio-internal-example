@@ -1,0 +1,76 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TransomExamples",
+		"_postman_id": "a8f51fca-e520-5f5d-44c8-26eef912d9b1",
+		"description": "Some useful requests on a TransomJS Example API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "administrator",
+						"password": "password",
+						"saveHelperData": true,
+						"showPassword": false
+					}
+				},
+				"url": "http://localhost:7070/api/v1/user/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW5pc3RyYXRvcjpwYXNzd29yZA==",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:7070/api/v1/fx/timesten?val=45",
+			"request": {
+				"url": {
+					"raw": "http://localhost:7070/api/v1/fx/timesten?val=45",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"v1",
+						"fx",
+						"timesten"
+					],
+					"query": [
+						{
+							"key": "val",
+							"value": "45",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer pwdYTdiNjdiODUtMGJhYy00M2M0LWI2ZWMtZTQ2NDU1OTdlODVj",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
