@@ -1,18 +1,23 @@
 ## Transom SocketIO Example
 
-This example builds on the [secured function example](https://github.com/binaryops-wiebo/transom-functions-secured-example). Here
-we add the [transom-socketio-internal](https://github.com/transomjs/transom-socketio-internal) plugin to the API. The server side 
-function implementation still multiplies and responds with the result, but now it also initiates an async message to connected sockets. Try it out with multiple browser sessions!
+This example builds on principles covered in the [secured function example](https://github.com/binaryops-wiebo/transom-functions-secured-example), but here
+we also add the [transom-socketio-internal](https://github.com/transomjs/transom-socketio-internal) plugin to the server. We still have our server side function implementation to multipliy and respond with the result, but now it also initiates an async message to connected sockets. This nifty example works best if you're able to try it out with multiple browsers.
 
-The login now creates an authenticated session to the socket server as well, using a short-lived token provided by the [transom-mongoose-none](https://github.com/transomjs/transom-mongoose-nonce) plugin. 
+We've modified the login to create an authenticated session to the socket server as well, using a short-lived token provided by the [transom-mongoose-nonce](https://github.com/transomjs/transom-mongoose-nonce) plugin. 
 
 ## Usage
-Clone the repo and run `npm install`.
-Update scripts section of the package.json file, to use the connect string to your mongoDb instance. You can get a free sandbox database at [mLab](https://www.mlab.com) or [download MongoDb here](https://www.mongodb.com/download-center#community) 
+Clone the repo and install the dependencies.
+```bash
+$ git clone git@github.com:binaryops-wiebo/transom-socketio-internal-example.git
+$ npm install
+
+```
+
+Next, you'll have to update scripts section of the package.json file, to use the connect string to your MongoDb instance. If you don't already have a local MongoDB running, you can get a free sandbox database at [mLab](https://www.mlab.com) or download the [MongoDb Community Server](https://www.mongodb.com/download-center#community) and install it locally.
 
 ## Running the example
-Run `npm start`. This will initialize the users and groups collection in the database. The default Administrator account is created with `password` as the password.
-Since logging in requires a POST request, a simple HTML file is included to login, using the transom-scaffold plugin. Browse to [http://localhost:7070/html/sample.html](http://localhost:7070/html/sample.html) to access the page.
-Have a look at the sample.js file under `public-assets` as well as the `myApi.js` file for the implementation of the server side function that emits messages over websockets.
+Run the example app with `npm start`. This will initialize the users and groups collections within the database. A default `Administrator` account is created with `password` as it's password.
+Since logging in requires a POST request, an HTML file is included to login, using the [transom-scaffold](https://github.com/transomjs/transom-scaffold) plugin. Browse to [http://localhost:7070/](http://localhost:7070/) and you should be redirected to the Login page at `html/sample.html`.
+Have a look at the `public-assets/sample.js` for the client side implementation and the `myApi.js` file for the  server side implementation of the function that emits messages over websockets.
 
-The administrator credentials are defaulted. Play around with the multiply function, try it with multiple browser sessions at the same time!  
+The administrator credentials are provided by default in the HTML. Play around with the multiply function, and try it with multiple browser sessions at the same time to see how it

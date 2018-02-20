@@ -1,12 +1,12 @@
 
 /** 
  * The authentication token we receive from the login request. 
-*/
+ */
 var authToken = '';
 
 /** 
- * Our socket client. We don't auto connect because we need to be authenticated with a short-term token.
-*/
+ * Our socket client. We don't auto connect because we need to be authenticated first.
+ */
 var socket = io({autoConnect:false});
 
 /** 
@@ -24,19 +24,23 @@ function doLogin(){
 
     }
 
+    // Randomly pick a number between 1 and 100
+    $('#valToMultiply').val(Math.round(Math.random()*100));
+
+    authToken = ''; // Clear authToken
+
     $.ajax({
         url: "/api/v1/user/login",
         type: "POST",
         beforeSend: setLoginHeader,
         success: function(data) {
-            // document.getElementById("json").innerHTML = JSON.stringify(data, undefined, 2);
+            // Keep track of the latest API response
             $('#lastResponse').text(JSON.stringify(data, undefined, 2));
 
             authToken = data.token;
 
-            //successfully logged in, now get a token for the socket server and connect there
+            // Successfully logged in, now get a token for the socket server and connect.
             getSocketTokenAndConnect();
-
         },
         error: function(err){
             console.log(err);
@@ -46,12 +50,13 @@ function doLogin(){
 }
 
 /**
- * We're listening to a pre-defined 'mySampleChannel'. Refer to 'myApi.js' to see how messages
- * are emitted on this channel. 
+ * We're listening to a pre-defined 'mySampleChannel'. 
+ * Refer to 'myApi.js' to see how messages are emitted on this channel. 
  */
 socket.on('mySampleChannel', function(data){
-        $("#lastSocketMsg").append($("<li>").text(data));
-    });
+    // Add new messages to the top of the list
+    $("#lastSocketMsg").prepend($("<li>").text(data));
+});
 
 /**
  * The Socket client is very resilient, if it needs to re-connect after a connection failure it will re-use
@@ -79,7 +84,7 @@ function doMultiplyCall(){
 
     var valToMultiply = $('#valToMultiply').val();
     if (isNaN(Number.parseFloat(valToMultiply))){
-        return alert('that is not a number');
+        return alert('Sorry, that is not a number.');
     }
 
     $.ajax({
@@ -89,15 +94,20 @@ function doMultiplyCall(){
         beforeSend: setAuthToken,
         success: function(data) {
             $('#lastResponse').text(JSON.stringify(data, undefined, 2));
+
+            // Randomly pick another number between 1 and 100
+            $('#valToMultiply').val(Math.round(Math.random()*100));
         },
         error: function(err){
             console.log(err);
-            $('#lastResponse').text(JSON.stringify(err.responseJSON, undefined, 2));
+            $('#lastResponse').text(JSON.stringify(err.responseJSON, undefined, 2) || 'Oh no, Something went terribly wrong!');
+
+            $('#login-row').show();
+            $('#multiplyfx-row').hide();            
         }
     });
 
 }
-
 
 /** 
  * Connecting to the socket server is a two step process.
@@ -117,7 +127,7 @@ function getSocketTokenAndConnect(){
         beforeSend: setAuthToken,
         success: function(data) {
             $('#lastResponse').text(JSON.stringify(data, undefined, 2));
-            $('#loginRow').hide();
+            $('#login-row').hide();
             connectSocket(data.token);                        
         },
         error: function(err){
@@ -134,11 +144,9 @@ function getSocketTokenAndConnect(){
  *  
  */
 function connectSocket(token){
-
     socket.io.opts.query = {
         token: token
     };
     socket.connect();
-    $('#multiplyfx').show();
-
+    $('#multiplyfx-row').show();
 }
