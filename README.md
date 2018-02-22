@@ -2,7 +2,7 @@
 ### Secured TransomJS SocketIO example
 
 In this example we create a TransomJS server and use the [transom-server-functions](https://transomjs.github.io/docs/transom-server-functions/) plugin to create an endpoint for a your custom function. The function is secured using the [transom-mongoose-localuser](https://transomjs.github.io/docs/transom-mongoose-localuser/) plugin. We will host a little html page to facilitate the login using the [transom-scaffold](https://transomjs.github.io/docs/transom-scaffold/) plugin.
-This example demonstrates how your own custom code can send asynchronous  messages to connected users using the [SocketIO plugin](https://transomjs.github.io/docs/transom-socketio-internal/). Your custom code runs in the context of the TransomJS server, and has access to the entire server context includind the message client provided by the socketIO plugin. In this example we just use the default administrator user to authenticate and connect to the SocketIO server.
+This example demonstrates how your own custom code can send asynchronous  messages to connected users using the [SocketIO plugin](https://transomjs.github.io/docs/transom-socketio-internal/). Your custom code runs in the context of the TransomJS server, and has access to the entire server context including the message client provided by the socketIO plugin. In this example we just use the default administrator user to authenticate and connect to the SocketIO server.
 
 ### Run the example
 Clone the `transom-socketio-internal-example` repository and install the dependencies with npm. 
