@@ -1,0 +1,138 @@
+{
+	"info": {
+		"name": "TransomExamples",
+		"_postman_id": "43d70b7b-ae49-9cf3-4084-9ee69e85e59d",
+		"description": "Some useful requests on a TransomJS Example API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login scripted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6c814322-1d1c-4600-9f77-426bfd80d1b6",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"//postman.setEnvironmentVariable(\"token\", data.token);",
+							"pm.globals.set(\"token\", data.token);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "administrator",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW5pc3RyYXRvcjpwYXNzd29yZA=="
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:7070/api/v1/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:7070/api/v1/fx/timesten?val=45",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:7070/api/v1/fx/timesten?val=45",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"api",
+						"v1",
+						"fx",
+						"timesten"
+					],
+					"query": [
+						{
+							"key": "val",
+							"value": "45",
+							"equals": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "51ed191d-c342-44df-8e34-864fa3e79832",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4ab1e085-08bd-417b-a8dd-5350be67d1b0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
