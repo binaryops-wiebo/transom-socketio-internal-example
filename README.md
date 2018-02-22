@@ -24,7 +24,7 @@ The first time you run the example, it will create a new database and initialize
 
 ``` javascript
  // ./public-assets/html/sample.js
-
+...
  /** 
  * Connecting to the socket server is a two step process.
  * first you need to request a socket token using an authenticated REST API call.
@@ -65,12 +65,14 @@ function connectSocket(token){
     socket.connect();
     $('#multiplyfx-row').show();
 }
+
+...
 ```
 
 On the server side, we start the TransomJS REST API server as well as the SocketIO server.
 ``` javascript
 // ./index.js
-
+...
 // ****************************************************************************
 // Start the Transom server...
 // ****************************************************************************
@@ -82,12 +84,14 @@ var restifyApp = server.listen(7070, function () {
 // Start the Socket.IO server...
 // ****************************************************************************
 transomSocketIOInternal.initializeWithServer(restifyApp);
+...
 ```
 
 The `myApi.js` file contains the implementation and details of the server function. We're still just multiplying by ten, like we did in the [secured functions example](https://transomjs.github.io/docs/secured-function-example/). However, this time the implementation of the function uses the passed in server reference to gain access to the message client and emits some fun messages to connected users.
 
 ``` Javascript
 // myApi.js
+...
 timesten: {
   methods: ["GET"],
   function: function (server, req, res, next) {
@@ -114,6 +118,8 @@ timesten: {
     next();
   }
 }
+
+...
 ```
 
 ### See Also
