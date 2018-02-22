@@ -15,14 +15,8 @@ var socket = io({autoConnect:false});
  * presented on subsequent authenticated requests as the Bearer token. 
 */
 function doLogin(){
-    const username = $('#username').val();
-    const pwd = $('#password').val();
-
-    var setLoginHeader = function(xhr){
-        const authVal = 'Basic ' +  btoa(username + ':' + pwd);
-        xhr.setRequestHeader('Authorization', authVal);
-
-    }
+    var username = $('#username').val();
+    var pwd = $('#password').val();
 
     // Randomly pick a number between 1 and 100
     $('#valToMultiply').val(Math.round(Math.random()*100));
@@ -32,7 +26,10 @@ function doLogin(){
     $.ajax({
         url: "/api/v1/user/login",
         type: "POST",
-        beforeSend: setLoginHeader,
+        beforeSend: function(xhr){
+            var authVal = 'Basic ' +  btoa(username + ':' + pwd);
+            xhr.setRequestHeader('Authorization', authVal);
+        },
         success: function(data) {
             // Keep track of the latest API response
             $('#lastResponse').text(JSON.stringify(data, undefined, 2));
@@ -78,10 +75,6 @@ socket.on('error', function(err) {
 */
 function doMultiplyCall(){
 
-    function setAuthToken(xhr){
-        xhr.setRequestHeader('Authorization', 'Bearer ' + authToken);
-    }
-
     var valToMultiply = $('#valToMultiply').val();
     if (isNaN(Number.parseFloat(valToMultiply))){
         return alert('Sorry, that is not a number.');
@@ -91,7 +84,9 @@ function doMultiplyCall(){
         url: "/api/v1/fx/timesten",
         data: {val: Number.parseFloat(valToMultiply)},
         type: "GET",
-        beforeSend: setAuthToken,
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', 'Bearer ' + authToken);
+        },
         success: function(data) {
             $('#lastResponse').text(JSON.stringify(data, undefined, 2));
 
@@ -106,7 +101,6 @@ function doMultiplyCall(){
             $('#multiplyfx-row').hide();            
         }
     });
-
 }
 
 /** 
@@ -135,7 +129,6 @@ function getSocketTokenAndConnect(){
             $('#lastResponse').text(JSON.stringify(err.responseJSON));
         }
     });
-    
 }
 
 /**
