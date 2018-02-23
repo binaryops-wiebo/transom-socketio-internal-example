@@ -24,23 +24,20 @@ The first time you run the example, it will create a new database and initialize
 
 ``` javascript
  // ./public-assets/html/sample.js
-...
- /** 
+     ...code removed for the example...
+/** 
  * Connecting to the socket server is a two step process.
- * first you need to request a socket token using an authenticated REST API call.
+ * First you need to request a socket token using an authenticated REST API call.
  * The token that is returned needs to be provided to the Socket server as a query argument.
- * It is a one-time use token that expires quickly.  
+ * It is a one-time use token that expires quickly.
 */
 function getSocketTokenAndConnect(){
-
-    function setAuthToken(xhr){
-        xhr.setRequestHeader('Authorization', 'Bearer ' + authToken);
-    }
-
     $.ajax({
         url: "/api/v1/user/sockettoken",
         type: "GET",
-        beforeSend: setAuthToken,
+        beforeSend: function (xhr){
+            xhr.setRequestHeader('Authorization', 'Bearer ' + authToken);
+        },
         success: function(data) {
             $('#lastResponse').text(JSON.stringify(data, undefined, 2));
             $('#login-row').hide();
@@ -65,14 +62,13 @@ function connectSocket(token){
     socket.connect();
     $('#multiplyfx-row').show();
 }
-
-...
+     ...code removed for the example...
 ```
 
 On the server side, we start the TransomJS REST API server as well as the SocketIO server.
 ``` javascript
 // ./index.js
-...
+     ...code removed for the example...
 // ****************************************************************************
 // Start the Transom server...
 // ****************************************************************************
@@ -84,7 +80,7 @@ var restifyApp = server.listen(7070, function () {
 // Start the Socket.IO server...
 // ****************************************************************************
 transomSocketIOInternal.initializeWithServer(restifyApp);
-...
+     ...code removed for the example...
 ```
 
 The `myApi.js` file contains the implementation and details of the server function. We're still just multiplying by ten, like we did in the [secured functions example](https://transomjs.github.io/docs/secured-function-example/). However, this time the implementation of the function uses the passed in server reference to gain access to the message client and emits some fun messages to connected users.
