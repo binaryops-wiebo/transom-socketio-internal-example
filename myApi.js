@@ -4,13 +4,13 @@ module.exports = {
 	transom: {},
 	definition: {
 		scaffold: {
-			root: {
+			redirectRoutes: {
 				path: '/',
-				redirect: '/html/sample.html'
+				target: '/html/sample.html'
 			},
-			"public-assets": {
-				static: true,
-				path: /html\/?.*/
+			staticRoutes: {
+				path: /html\/?.*/,
+				folder: "public-assets"
 			}
 		},
 		functions: {
