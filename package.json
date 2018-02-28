@@ -17,9 +17,10 @@
     "@transomjs/transom-mongoose": "^1.1.16",
     "@transomjs/transom-mongoose-localuser": "^1.0.11",
     "@transomjs/transom-mongoose-nonce": "^1.0.4",
-    "@transomjs/transom-scaffold": "^1.0.11",
+    "@transomjs/transom-scaffold": "^1.0.12",
     "@transomjs/transom-server-functions": "^1.0.5",
-    "@transomjs/transom-socketio-internal": "^0.1.6"
+    "@transomjs/transom-socketio-internal": "^0.1.6",
+    "opn": "^5.2.0"
   },
   "devDependencies": {
     "cross-env": "^5.1.3"

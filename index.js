@@ -8,6 +8,8 @@ const transomSocketIOInternal = require('@transomjs/transom-socketio-internal');
 const transomScaffold = require('@transomjs/transom-scaffold');
 const transomNonce = require('@transomjs/transom-mongoose-nonce');
 
+const opn = require('opn');
+
 const transom = new Transom();
 
 // ****************************************************************************
@@ -61,14 +63,13 @@ transom.initialize(myApi).then(function (server) {
 		// ****************************************************************************
 		var restifyApp = server.listen(7070, function () {
 			console.log('%s listening at %s', server.name, server.url);
+			opn(`${server.url}/html/sample.html`);
 		});
 
 		// ****************************************************************************
 		// Start the Socket.IO server...
 		// ****************************************************************************
 		transomSocketIOInternal.initializeWithServer(restifyApp);
-
-
 	})
 	.catch(function (err) {
 		console.log('Unable to start the server, exiting');
