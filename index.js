@@ -41,7 +41,7 @@ transom.initialize(myApi).then(function (server) {
 		// ****************************************************************************
 		// Handle 404 errors when a route is undefined.
 		// ****************************************************************************
-		server.get('.*', function (req, res, next) {
+		server.get('*', function (req, res, next) {
 			var err = new Error(req.url + " does not exist");
 			err.status = 404;
 			next(err);
@@ -72,7 +72,7 @@ transom.initialize(myApi).then(function (server) {
 		transomSocketIOInternal.initializeWithServer(restifyApp);
 	})
 	.catch(function (err) {
-		console.log('Unable to start the server, exiting');
+		console.log('Unable to start the server, exiting', err);
 		process.exit(-1);
 	});
 
