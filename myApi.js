@@ -9,7 +9,7 @@ module.exports = {
 				target: '/html/sample.html'
 			},
 			staticRoutes: {
-				path: /html\/?.*/,
+				path: '/html/.*',
 				folder: "public-assets"
 			}
 		},

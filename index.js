@@ -12,13 +12,13 @@ const opn = require('opn');
 
 const transom = new Transom();
 
-// ****************************************************************************
+// ***************************************************************
 // This sample app doesn't use anything from the API definition.
-// ****************************************************************************
+// ***************************************************************
 const myApi = require('./myApi');
 console.log("Running " + myApi.name);
 
-const mongoUri = process.env.connectstr
+const mongoUri = "mongodb://localhost/transom-db-socketio";
 
 console.log('mongo connect string is ', mongoUri);
 
